@@ -38,6 +38,20 @@ public class UserTest extends EasySecurity {
     public boolean enableOAuth() {
         return true;
     }
+    // Example of creating tokens with different expiration times
+    //public String defaultToken = createToken("yash"); // 30 minutes expiration
+    //public String longLivedToken = createToken("yash", 60 * 24); // 24 hours expiration
+    public String shortLivedToken = createToken("yash", 5); // 5 minutes expiration
+
+    // Example of token validation
+    public boolean validateUserToken(String token) {
+        return validateToken(token, "yash");
+    }
+
+    // Example of extracting username from token
+    public String getUsernameFromToken(String token) {
+        return extractUsernameFromToken(token);
+    }
 
 
 }
