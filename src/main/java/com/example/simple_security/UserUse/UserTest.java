@@ -4,6 +4,7 @@ import com.example.simple_security.config.EasySecurity;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 public class UserTest extends EasySecurity {
     @Override
     public List<String> permittedUrls() {
-        return List.of("/welcome", "get-token");
+        return List.of("/welcome", "get-token", "/extract-username","/validate-token");
     }
 
     @Override
@@ -25,7 +26,7 @@ public class UserTest extends EasySecurity {
     }
 
     @Override
-    public boolean csrfToken() {
+    public boolean disableCsrfToken() {
         return true;
     }
 
@@ -38,6 +39,7 @@ public class UserTest extends EasySecurity {
     public boolean enableOAuth() {
         return true;
     }
+
     // Example of creating tokens with different expiration times
     //public String defaultToken = createToken("yash"); // 30 minutes expiration
     //public String longLivedToken = createToken("yash", 60 * 24); // 24 hours expiration
@@ -52,6 +54,4 @@ public class UserTest extends EasySecurity {
     public String getUsernameFromToken(String token) {
         return extractUsernameFromToken(token);
     }
-
-
 }

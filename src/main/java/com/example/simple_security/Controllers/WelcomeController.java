@@ -29,6 +29,35 @@ public class WelcomeController {
                 ));
     }
 
+
+
+    @GetMapping("/extract-username")
+    public ResponseEntity<?> extractUsername(@RequestHeader("Authorization") String token) {
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+            String username = userTest.getUsernameFromToken(token);
+            
+            if (username != null) {
+                return ResponseEntity.ok()
+                        .body(Map.of(
+                                "username", username,
+                                "token", token
+                        ));
+            } else {
+                return ResponseEntity.badRequest()
+                        .body(Map.of(
+                                "error", "Invalid token",
+                                "message", "Could not extract username from token"
+                        ));
+            }
+        }
+        return ResponseEntity.badRequest()
+                .body(Map.of(
+                        "error", "Invalid token format",
+                        "message", "Token must start with 'Bearer '"
+                ));
+    }
+
     @GetMapping("/validate-token")
     public ResponseEntity<?> validateToken(@RequestHeader("Authorization") String token) {
         if (token != null && token.startsWith("Bearer ")) {
@@ -36,13 +65,26 @@ public class WelcomeController {
             boolean isValid = userTest.validateUserToken(token);
             String username = userTest.getUsernameFromToken(token);
             
-            return ResponseEntity.ok()
-                    .body(Map.of(
-                            "valid", isValid,
-                            "username", username
-                    ));
+            if (isValid) {
+                return ResponseEntity.ok()
+                        .body(Map.of(
+                                "valid", true,
+                                "username", username,
+                                "message", "Token is valid"
+                        ));
+            } else {
+                return ResponseEntity.badRequest()
+                        .body(Map.of(
+                                "valid", false,
+                                "message", "Token is invalid or expired"
+                        ));
+            }
         }
-        return ResponseEntity.badRequest().body("Invalid token format");
+        return ResponseEntity.badRequest()
+                .body(Map.of(
+                        "error", "Invalid token format",
+                        "message", "Token must start with 'Bearer '"
+                ));
     }
 
     @GetMapping("/home")

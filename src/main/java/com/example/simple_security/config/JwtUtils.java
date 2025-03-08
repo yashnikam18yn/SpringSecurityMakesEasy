@@ -4,7 +4,6 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.io.Decoders;
@@ -15,8 +14,6 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 // here only generate the token
 
@@ -43,17 +40,14 @@ public class JwtUtils {
 
     // Function which generates token with custom expiration
     protected String generateToken(String username, long expirationMinutes) {
-        Map<String, Object> claims = new HashMap<>();
         Date now = new Date(System.currentTimeMillis());
+
         Date expiration = new Date(now.getTime() + expirationMinutes * 60 * 1000);
 
         return Jwts.builder()
-                .claims()
-                .add(claims)
                 .subject(username)
                 .issuedAt(now)
                 .expiration(expiration)
-                .and()
                 .signWith(getKey())
                 .compact();
     }
@@ -80,9 +74,9 @@ public class JwtUtils {
     public boolean validateToken(String token, String username) {
         try {
             String extractedUsername = extractUserName(token);
-            return extractedUsername != null && 
-                   extractedUsername.equals(username) && 
-                   !isTokenExpired(token);
+            return extractedUsername != null &&
+                    extractedUsername.equals(username) &&
+                    !isTokenExpired(token);
         } catch (JwtException e) {
             return false;
         }

@@ -20,7 +20,7 @@ public class JWTValidate extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @Autowired
+
     private UserDetailsService userDetailsService;
 
     @Override
