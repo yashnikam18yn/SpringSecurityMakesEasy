@@ -8,23 +8,34 @@
 		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>simple_security</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>simple_security</name>
-	<description>Build my own framework to makes spring security easy</description>
-	<url/>
+	<groupId>com.yashnikam</groupId>
+	<artifactId>spring-security-makes-easy</artifactId>
+	<version>0.0.1</version>
+	<name>Spring Security Makes Easy</name>
+	<description>A framework that simplifies Spring Security setup</description>
+	<url>https://github.com/yashnikam18yn/SpringSecurityMakesEasy</url>
+
 	<licenses>
-		<license/>
+		<license>
+			<name>Apache License 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
 	</licenses>
+
 	<developers>
-		<developer/>
+		<developer>
+			<id>yashnikam18yn</id>
+			<name>Yash Nikam</name>
+			<email>yashnikam1804@gmail.com</email>
+			<url>https://github.com/yashnikam18yn</url>
+		</developer>
 	</developers>
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection>scm:git:https://github.com/yashnikam18yn/SpringSecurityMakesEasy.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:yashnikam18yn/SpringSecurityMakesEasy.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/yashnikam18yn/SpringSecurityMakesEasy</url>
 	</scm>
 	<properties>
 		<java.version>17</java.version>
@@ -113,4 +124,14 @@
 		</plugins>
 	</build>
 
+	<distributionManagement>
+		<repository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
