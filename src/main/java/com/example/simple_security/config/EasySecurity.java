@@ -37,7 +37,7 @@ public abstract class EasySecurity extends JwtUtils {
 
     private boolean enableOAuth = false;
 
-    private boolean isValidateToken = false;
+    private boolean enableTokenValidation = false;
 
     @PostConstruct
     public void init(){
@@ -46,7 +46,7 @@ public abstract class EasySecurity extends JwtUtils {
         this.roleBasedUrls=roleBasedUrls();
         this.disableCsrfToken=disableCsrfToken();
         this.enableOAuth=enableOAuth();
-        this.isValidateToken=isValidateToken();
+        this.enableTokenValidation=enableTokenValidation();
     }
 
     @Bean
@@ -63,14 +63,28 @@ public abstract class EasySecurity extends JwtUtils {
                 })
                 .csrf(csrf -> {
                     if (disableCsrfToken()){
-                        csrf.disable();
+                        try{
+                            csrf.disable();
+                        }catch (Exception e){
+                            logger.error("Unable to disable the csrf token "+e.getMessage());
+                        }
+
                     }
                 });
-                if (isValidateToken()){
-                    httpSecurity.addFilterBefore(jwtValidate, UsernamePasswordAuthenticationFilter.class);
+                if (enableTokenValidation()){
+                    try{
+                        httpSecurity.addFilterBefore(jwtValidate, UsernamePasswordAuthenticationFilter.class);
+                    }catch (Exception e){
+                        logger.error("Unable to launch token functionality "+e.getMessage());
+                    }
                 }
                 if(enableOAuth()){
-                    httpSecurity.oauth2Login(Customizer.withDefaults());
+                    try {
+                        httpSecurity.oauth2Login(Customizer.withDefaults());
+                    } catch (Exception e){
+                        logger.error("Unable to start Oauth please check application.properties "+e.getMessage());
+                    }
+
                 }
                 httpSecurity.formLogin(Customizer.withDefaults());
 
@@ -91,7 +105,7 @@ public abstract class EasySecurity extends JwtUtils {
     }
 
     /*validate token but once you define it as true then you need to define the token methods*/
-    public abstract boolean isValidateToken();
+    public abstract boolean enableTokenValidation();
 
     /*for the Oauth enable but you need to define client id and client secret*/
     public abstract boolean enableOAuth();
