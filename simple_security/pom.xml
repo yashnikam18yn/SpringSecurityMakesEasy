@@ -8,7 +8,7 @@
 		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.yashnikam</groupId>
+	<groupId>io.github.yashnikam18yn</groupId>
 	<artifactId>spring-security-makes-easy</artifactId>
 	<version>0.0.1</version>
 	<name>Spring Security Makes Easy</name>
