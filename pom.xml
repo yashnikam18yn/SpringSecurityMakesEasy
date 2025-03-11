@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>io.github.yashnikam18yn</groupId>
 	<artifactId>spring-security-makes-easy</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.7</version>
 	<name>Spring Security Makes Easy</name>
 	<description>A framework that simplifies Spring Security setup</description>
 	<url>https://github.com/yashnikam18yn/SpringSecurityMakesEasy</url>
@@ -31,15 +35,18 @@
 			<url>https://github.com/yashnikam18yn</url>
 		</developer>
 	</developers>
+
 	<scm>
 		<connection>scm:git:https://github.com/yashnikam18yn/SpringSecurityMakesEasy.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:yashnikam18yn/SpringSecurityMakesEasy.git</developerConnection>
 		<tag>HEAD</tag>
 		<url>https://github.com/yashnikam18yn/SpringSecurityMakesEasy</url>
 	</scm>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -49,7 +56,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -65,55 +71,48 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
 			<version>0.12.5</version>
 		</dependency>
-
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
 			<version>0.12.5</version>
 			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.12.5</version>
 			<scope>runtime</scope>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
-
 	</dependencies>
-
-	<!-- Nexus Staging Plugin -->
-
 
 	<build>
 		<plugins>
 
+			<!-- Maven JAR Plugin for creating executable JAR -->
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
 				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<!-- Specify the main class if it's an executable JAR -->
+							<!-- <mainClass>com.yourpackage.YourMainClass</mainClass> -->
+						</manifest>
+					</archive>
 				</configuration>
 			</plugin>
-
 
 			<!-- Central Publishing Plugin -->
 			<plugin>
@@ -126,7 +125,7 @@
 				</configuration>
 			</plugin>
 
-			<!--javadoc-->
+			<!-- Javadoc Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -141,7 +140,7 @@
 				</executions>
 			</plugin>
 
-<!--			sources-->
+			<!-- Source Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -156,7 +155,7 @@
 				</executions>
 			</plugin>
 
-<!--			sources gpg-->
+			<!-- GPG Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
@@ -172,7 +171,7 @@
 				</executions>
 			</plugin>
 
-<!--			for version-->
+			<!-- Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -190,12 +189,8 @@
 				</configuration>
 			</plugin>
 
-
 		</plugins>
-
 	</build>
-
-
 
 	<distributionManagement>
 		<repository>
@@ -207,4 +202,5 @@
 			<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
+
 </project>
