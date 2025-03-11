@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -22,25 +23,20 @@ public abstract class EasySecurity extends JwtUtils {
     @Autowired(required = true)
     private JWTValidate jwtValidate;
 
-    private List<String> permittedUrls;
-    private List<String> authenticatedUrls;
-    private Map<String, String> roleBasedUrls;
-    private boolean disableCsrfToken = false;
-    private boolean enableOAuth = false;
-    private boolean enableTokenValidation = false;
+    private final List<String> permittedUrls;
+    private final List<String> authenticatedUrls;
+    private final Map<String, String> roleBasedUrls;
+    private final boolean disableCsrfToken;
+    private final boolean enableOAuth;
+    private final boolean enableTokenValidation;
 
-    @PostConstruct
-    public void init() {
-        this.permittedUrls = permittedUrls();
-        this.authenticatedUrls = authenticatedUrls();
-        this.roleBasedUrls = roleBasedUrls();
+    protected EasySecurity() {
+        this.permittedUrls = safeList(permittedUrls());
+        this.authenticatedUrls = safeList(authenticatedUrls());
+        this.roleBasedUrls = safeMap(roleBasedUrls());
         this.disableCsrfToken = disableCsrfToken();
         this.enableOAuth = enableOAuth();
         this.enableTokenValidation = enableTokenValidation();
-
-        if (enableTokenValidation && jwtValidate == null) {
-            logger.warn("Token validation is enabled, but JWTValidate bean is missing. Token validation will not work.");
-        }
     }
 
     @Bean
@@ -73,6 +69,14 @@ public abstract class EasySecurity extends JwtUtils {
         httpSecurity.formLogin(Customizer.withDefaults());
 
         return httpSecurity.build();
+    }
+
+    private List<String> safeList(List<String> list) {
+        return (list != null) ? list : Collections.emptyList();
+    }
+
+    private Map<String, String> safeMap(Map<String, String> map) {
+        return (map != null) ? map : Collections.emptyMap();
     }
 
     public abstract List<String> permittedUrls();

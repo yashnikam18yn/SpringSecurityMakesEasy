@@ -14,7 +14,7 @@
 
 	<groupId>io.github.yashnikam18yn</groupId>
 	<artifactId>spring-security-makes-easy</artifactId>
-	<version>1.0.7</version>
+	<version>1.0.8</version>
 	<name>Spring Security Makes Easy</name>
 	<description>A framework that simplifies Spring Security setup</description>
 	<url>https://github.com/yashnikam18yn/SpringSecurityMakesEasy</url>
