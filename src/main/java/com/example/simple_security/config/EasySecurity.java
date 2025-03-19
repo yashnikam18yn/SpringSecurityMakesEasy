@@ -20,8 +20,9 @@ public abstract class EasySecurity extends JwtUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(EasySecurity.class);
 
-    @Autowired(required = true)
-    private JWTValidate jwtValidate;
+   @Autowired(required = false)
+   private JWTValidate jwtValidate;
+
 
     private final List<String> permittedUrls;
     private final List<String> authenticatedUrls;

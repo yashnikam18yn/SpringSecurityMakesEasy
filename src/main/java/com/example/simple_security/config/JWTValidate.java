@@ -18,8 +18,14 @@ import java.io.IOException;
 @Component
 public class JWTValidate extends OncePerRequestFilter {
 
-    @Autowired(required = true)
-    private JwtUtils jwtUtils;
+    private final JwtUtils jwtUtils;
+
+//    @Autowired(required = true)
+//    private JwtUtils jwtUtils;
+
+    public JWTValidate(JwtUtils jwtUtils){
+        this.jwtUtils=jwtUtils;
+    }
 
 
     private UserDetailsService userDetailsService;
