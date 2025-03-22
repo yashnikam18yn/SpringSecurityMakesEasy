@@ -1,6 +1,6 @@
 package com.example.simple_security.config;
 
-import jakarta.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +31,23 @@ public abstract class EasySecurity extends JwtUtils {
     private final boolean enableOAuth;
     private final boolean enableTokenValidation;
 
+    private final boolean isCustomLoginPage;
+    private final String customLoginPageUrl;
+    private final String loginProcessingUrl;
+    private final String successForwardUrl;
+
     protected EasySecurity() {
-        this.permittedUrls = safeList(permittedUrls());
-        this.authenticatedUrls = safeList(authenticatedUrls());
-        this.roleBasedUrls = safeMap(roleBasedUrls());
-        this.disableCsrfToken = disableCsrfToken();
-        this.enableOAuth = enableOAuth();
-        this.enableTokenValidation = enableTokenValidation();
+        this.permittedUrls=safeList(permittedUrls());
+        this.authenticatedUrls=safeList(authenticatedUrls());
+        this.roleBasedUrls=safeMap(roleBasedUrls());
+        this.disableCsrfToken=disableCsrfToken();
+        this.enableOAuth=enableOAuth();
+        this.enableTokenValidation=enableTokenValidation();
+        this.isCustomLoginPage=isCustomLoginPage();
+        this.customLoginPageUrl=customLoginPageUrl();
+        this.loginProcessingUrl=loginProcessingUrl();
+        this.successForwardUrl=successForwardUrl();
+
     }
 
     @Bean
@@ -64,10 +74,31 @@ public abstract class EasySecurity extends JwtUtils {
         }
 
         if (enableOAuth) {
-            httpSecurity.oauth2Login(Customizer.withDefaults());
+            try{
+                httpSecurity.oauth2Login(Customizer.withDefaults());
+            }catch (Exception e){
+                logger.error("Unable to start oauth please check application.properties: "+e.getMessage());
+            }
         }
 
-        httpSecurity.formLogin(Customizer.withDefaults());
+        if(this.isCustomLoginPage()){
+            try{
+                httpSecurity.formLogin(form ->
+                        form.loginPage(this.customLoginPageUrl())
+                                .loginProcessingUrl(this.loginProcessingUrl())
+                                .defaultSuccessUrl(this.successForwardUrl(),true)
+                                .permitAll()
+                        );
+            }catch (Exception e){
+                logger.error("Error configuration from login: "+ e.getMessage());
+            }
+        }else {
+            try{
+                httpSecurity.formLogin(Customizer.withDefaults());
+            }catch (Exception e){
+                logger.error("Error configuring default form login: "+e.getMessage());
+            }
+        }
 
         return httpSecurity.build();
     }
@@ -80,17 +111,38 @@ public abstract class EasySecurity extends JwtUtils {
         return (map != null) ? map : Collections.emptyMap();
     }
 
+    //return the list of permitted urls
     public abstract List<String> permittedUrls();
+
+    //return the list of authenticated urls
     public abstract List<String> authenticatedUrls();
+
+    //return the key pair of url and role
     public abstract Map<String, String> roleBasedUrls();
+
+
     public abstract boolean disableCsrfToken();
     public abstract boolean enableTokenValidation();
     public abstract boolean enableOAuth();
+
+    public abstract boolean isCustomLoginPage();
+    public abstract String customLoginPageUrl();
+    public abstract String loginProcessingUrl();
+    public abstract String successForwardUrl();
 
     public String createToken(String username) {
         return generateToken(username);
     }
 
+
+
+
+    /**
+     * Creates a JWT token with custom expiration time
+     * @param username The username to create token for
+     * @param expirationMinutes Token expiration time in minutes
+     * @return JWT token
+     */
     public String createToken(String username, long expirationMinutes) {
         if (expirationMinutes <= 0) {
             logger.error("Expiration time should not be zero or negative.");
@@ -103,6 +155,14 @@ public abstract class EasySecurity extends JwtUtils {
         }
     }
 
+
+
+    /**
+     * Validates a JWT token
+     * @param token The JWT token to validate
+     * @param username The username to validate against
+     * @return true if token is valid, false otherwise
+     */
     public boolean validateToken(String token, String username) {
         if (token == null || token.isEmpty() || username == null) {
             logger.error("Token and username should not be null or empty.");
@@ -115,6 +175,12 @@ public abstract class EasySecurity extends JwtUtils {
         }
     }
 
+
+    /**
+     * Extracts username from a JWT token
+     * @param token The JWT token
+     * @return username if token is valid, null otherwise
+     */
     public String extractUsernameFromToken(String token) {
         if (token == null || token.isEmpty()) {
             logger.error("Token should not be null or empty.");
