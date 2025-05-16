@@ -15,3 +15,9 @@ This is a lightweight security framework built on top of Spring Security to simp
 ## Installation
 To use this framework in your project, add the following dependency (once published):
 
+<dependency>
+    <groupId>io.github.yashnikam18yn</groupId>
+    <artifactId>spring-security-makes-easy</artifactId>
+    <version>1.1.2</version>
+</dependency>
+
