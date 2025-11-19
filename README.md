@@ -13,6 +13,8 @@ This is a lightweight security framework built on top of Spring Security to simp
 - 📄 **Pre-Built Security Methods** – Use built-in methods for common security tasks
 
 ## Installation
+maven URL - https://mvnrepository.com/artifact/io.github.yashnikam18yn/spring-security-makes-easy/1.1.2
+
 To use this framework in your project, add the following dependency (once published):
 
 <dependency>
