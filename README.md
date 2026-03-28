@@ -30,6 +30,10 @@ A lightweight framework built on top of Spring Security to simplify authenticati
 
 ---
 
+🔗 Maven Central
+
+👉 https://central.sonatype.com/artifact/io.github.yashnikam18yn/spring-security-makes-easy/1.2.0
+
 ## 📦 Installation
 
 Add the dependency:
@@ -42,6 +46,3 @@ Add the dependency:
 </dependency>
 
 
-🔗 Maven Central
-
-👉 https://central.sonatype.com/artifact/io.github.yashnikam18yn/spring-security-makes-easy/1.2.0
