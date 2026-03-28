@@ -1,25 +1,42 @@
-# Simple Security Framework
+# 🔐 Spring Security Makes Easy
 
-## Overview
-This is a lightweight security framework built on top of Spring Security to simplify authentication and authorization. It provides predefined methods to manage security easily without complex configurations.
+A lightweight framework built on top of Spring Security to simplify authentication and authorization with minimal configuration.
 
-## Features
-- 🔑 **Easy URL Permissions** – Easily allow/deny specific routes
-- 👥 **Role-Based Access Control** – Restrict access based on roles
-- 🔐 **JWT Authentication & Validation** – Simplifies token-based security
-- 🌍 **OAuth2 Login (Google, GitHub, etc.)** – Ready-to-use social logins
-- 🛡 **API Protection** – Secure API endpoints with minimal configuration
-- 🔧 **Customizable Security** – Extend and modify as needed
-- 📄 **Pre-Built Security Methods** – Use built-in methods for common security tasks
+---
 
-## Installation
-maven URL - https://mvnrepository.com/artifact/io.github.yashnikam18yn/spring-security-makes-easy/1.1.2
+## 🚀 What's New in v1.2.0
 
-To use this framework in your project, add the following dependency (once published):
+- ✅ Configurable JWT secret via `application.properties`
+- ✅ CORS configuration support (`EasyCorsConfiguration`)
+- ✅ Session management support:
+  - STATELESS
+  - IF_REQUIRED
+  - NEVER
+  - ALWAYS
+- 🐛 Fixed `NullPointerException` in JWT validation
+- 🐛 Refactored `EasySecurity` (Inheritance → Composition)
 
+---
+
+## ✨ Features
+
+- 🔑 **Easy URL Permissions** – Quickly allow/deny routes
+- 👥 **Role-Based Access Control** – Restrict access by roles
+- 🔐 **JWT Authentication & Validation** – Simplified token security
+- 🌍 **OAuth2 Login** – Google, GitHub, and more
+- 🛡 **API Protection** – Secure endpoints easily
+- 🔧 **Customizable Security** – Extend as per your needs
+- 📄 **Pre-Built Methods** – Reduce boilerplate code
+
+---
+
+## 📦 Installation
+
+Add the dependency:
+
+```xml
 <dependency>
     <groupId>io.github.yashnikam18yn</groupId>
     <artifactId>spring-security-makes-easy</artifactId>
-    <version>1.1.2</version>
+    <version>1.2.0</version>
 </dependency>
-
