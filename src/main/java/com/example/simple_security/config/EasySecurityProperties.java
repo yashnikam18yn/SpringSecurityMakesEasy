@@ -3,7 +3,6 @@ package com.example.simple_security.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@Component
 @ConfigurationProperties(prefix = "easysecurity")
 public class EasySecurityProperties {
 
