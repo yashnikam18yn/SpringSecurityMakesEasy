@@ -1,5 +1,5 @@
 ![Maven Central](https://img.shields.io/maven-central/v/io.github.yashnikam18yn/spring-security-makes-easy)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
 ![Java](https://img.shields.io/badge/Java-11+-orange.svg)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen)
 ![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
