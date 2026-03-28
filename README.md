@@ -35,6 +35,9 @@ A lightweight framework built on top of Spring Security to simplify authenticati
 - 📄 **Pre-Built Methods** – Reduce boilerplate code
 
 ---
+## 📄 License
+
+This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
 
 🔗 Maven Central
 
@@ -50,5 +53,7 @@ Add the dependency:
     <artifactId>spring-security-makes-easy</artifactId>
     <version>1.2.0</version>
 </dependency>
+
+----
 
 
