@@ -40,3 +40,8 @@ Add the dependency:
     <artifactId>spring-security-makes-easy</artifactId>
     <version>1.2.0</version>
 </dependency>
+
+
+🔗 Maven Central
+
+👉 https://central.sonatype.com/artifact/io.github.yashnikam18yn/spring-security-makes-easy/1.2.0
