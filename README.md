@@ -44,6 +44,14 @@ This project is licensed under the Apache License 2.0 - see the LICENSE file for
 
 👉 https://central.sonatype.com/artifact/io.github.yashnikam18yn/spring-security-makes-easy/1.2.0
 
+## 📘 Documentation
+
+- [Getting Started](docs/getting-started.md)
+- [Configuration Guide](docs/configuration.md)
+- [JWT Usage](docs/jwt-usage.md)
+- [CORS Configuration](docs/cors-config.md)
+- [OAuth Setup](docs/oauth-setup.md)
+
 ## 📦 Installation
 
 Add the dependency:
