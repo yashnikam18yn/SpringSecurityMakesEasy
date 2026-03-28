@@ -53,6 +53,3 @@ Add the dependency:
     <artifactId>spring-security-makes-easy</artifactId>
     <version>1.2.0</version>
 </dependency>
-
-
-
